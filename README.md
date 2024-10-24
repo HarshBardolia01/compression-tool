@@ -1,2 +1,3 @@
 # compression-tool
-John Crickett's Coding Challenge 3 - Compression Tool
+
+This challenge is a part of the Coding Challenges by John Crickett, which helps software engineers level up their skills through deliberate practice.
