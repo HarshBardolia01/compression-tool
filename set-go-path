@@ -1,0 +1,36 @@
+#!/bin/bash
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+if [[ "$0" == "./set-go-path" ]]; then
+  echo "Script exports GOPATH, run using source"
+  echo "Example: source $0"
+  exit 1
+fi
+
+current_path=`pwd`
+cd ../..
+export GOPATH=`pwd`
+cd $current_path
+echo -e "\n${CYAN}GOPATH :$GOPATH${NC}"
+
+export GOMODFILE=$current_path/go.mod
+
+if test -f "$GOMODFILE"; then
+   echo -e "
+${RED}Skipping copy from base.go.mod,base.go.sum to go.mod,go.sum !
+  |-> Delete the go.mod & go.sum for fresh dep resolving."
+else
+   cp base.go.mod go.mod 2>/dev/null
+   cp base.go.sum go.sum 2>/dev/null
+fi
+
+echo  -e "
+${GREEN}Run following commands to setup loacally:
+${CYAN}
+  1. go mod tidy
+  2. go mod vendor
+  "
